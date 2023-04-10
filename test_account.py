@@ -15,7 +15,9 @@ class Test:
 
     def test_deposit(self):
         assert self.test_account.deposit(0) is False
+        assert self.test_account.get_balance() == pytest.approx(0, abs=0.001)
         assert self.test_account.deposit(-38) is False
+        assert self.test_account.get_balance() == pytest.approx(0, abs=0.001)
         assert self.test_account.deposit(5) is True
         assert self.test_account.get_balance() == pytest.approx(5, abs=0.001)
         assert self.test_account.deposit(10.38) is True
@@ -24,6 +26,7 @@ class Test:
     def test_withdraw(self):
         self.test_account.deposit(50)
         assert self.test_account.withdraw(0) is False
+        assert self.test_account.get_balance() == pytest.approx(50, abs=0.001)
         assert self.test_account.withdraw(-92) is False
         assert self.test_account.get_balance() == pytest.approx(50, abs=0.001)
         assert self.test_account.withdraw(65) is False
